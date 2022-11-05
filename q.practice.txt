@@ -1,0 +1,230 @@
+# history
+    1  hostname
+    2  cd /etc/yum.repos.d
+    3  ll
+    4  vi rhel82.repo
+    5  yum clean all
+    6  yum repolist
+    7  cd
+    8  groupadd stoogs
+    9  useradd curly larry
+   10  useradd curly
+   11  useradd larry
+   12  useradd -s /sbin/nologin moe
+   13  groupmems -a curly -g stoogs
+   14  groupmems -a larry -g stoogs
+   15  passwd larry
+   16  echo "jenny"|passwd --stdin larry
+   17  echo "jenny"|passwd --stdin curly
+   18  echo "jenny"|passwd --stdin moe
+   19  vi /etc/cron.deny
+   20  su - larry
+   21  su - curly
+   22  cd /var/spool/cron
+   23  ll
+   24  cd
+   25  cd /var/log/
+   26  ll
+   27  cat cron
+   28  cd
+   29  mkdir /home/manager
+   30  cd /home/manager
+   31  pwd
+   32  touch files11.txt
+   33  ll
+   34  chgrp stoogs /home/manager
+   35  ll
+   36  touch k
+   37  ll
+   38  cd
+   39  chgrp -R stoogs /home/manager
+   40  cd /home/manager
+   41  touch ki
+   42  ll
+   43  cd
+   44  ls -l /home/manager
+   45  ls -ld /home/manager
+   46  chgrp stoogs ki
+   47  cd /home/manager
+   48  ll
+   49  chgrp stoogs ki
+   50  ll
+   51  cd
+   52  getfacl /home/manager
+   53  setfacl -m g:stoogs:rwx /home/manager
+   54  getfacl /home/manager
+   55  su - larry
+   56  setfacl -m m:rwx /home/manager/
+   57  su - larry
+   58  cd /home/manager/
+   59  ll
+   60  touch jhg
+   61  ll
+   62  chmod g+s /home/manager/
+   63  ll
+   64  touch jkk
+   65  ll
+   66  su - larry
+   67  cd
+   68  lsblk
+   69  yum install gdisk* -y
+   70  gdisk /dev/sdb
+   71  lsblk
+   72  df -h
+   73  vgcreate -s 8 marvel
+   74  vgcreate -s 8 marvel /dev/sdb1
+   75  lvcreate -n slab -L 160M marvel
+   76  mkfs.xfs -t /dev/marvel/slab
+   77  mkfs.xfs /dev/marvel/slab
+   78  mkdir /mnt/slab
+   79  vi /etc/fstab
+   80  blkid
+   81  vi /etc/fstab
+   82  mount -a
+   83  df -h
+   84  lvextend -L 320M /dev/marvel/slab
+   85  df -h
+   86  lvs
+   87  xfs_growfs /dev/marvel/slab
+   88  df -h
+   89  swapon -s
+   90  gdisk /dev/sdb
+   91  mkswap /dev/sdb2
+   92  pvcreate /dev/sdb2
+   93  lsblk
+   94  partprob /dev/sdb
+   95  partprobd /dev/sdb
+   96  partprobe /dev/sdb
+   97  lsblk
+   98  mkswap /dev/sdb2
+   99  vi /etc/fstab
+  100  swapon -a
+  101  df -h
+  102  swapon -s
+  103  gdisk /dev/sdd
+  104  lsblk
+  105  vgcreate alcvg /dev/sdd1
+  106  lvcreate -n alclv01 -L 1G alcvg
+  107  mkfs.xfs /dev/alcvg/alclv01
+  108  mkdir /alcfs
+  109  vi /etc/fstab
+  110  mount -a
+  111  lvextend -L 2G /dev/alcvg/alclv01
+  112  xfs_growfs /dev/alcvg/alclv01
+  113  df -h
+  114  lvs
+  115  gdisk /dev/sdc
+  116  vgcreate mirrorvg /dev/sdc{1..2}
+  117  lvcreate --type raid1 -m1 -n mirrorlv -L 1G mirrorvg /dev/sdc{1..2}
+  118  lvcreate --type raid1 -m1 -n mirrorlv -L 950M mirrorvg /dev/sdc{1..2}
+  119  lvs
+  120  lsblk
+  121  lvdisplay /dev/mirrorvg/mirrorlv
+  122  vgdisplay mirrorvg
+  123  yum install autofs -y
+  124  systemctl status autofs
+  125  systemctl enable autofs
+  126  systemctl status autofs
+  127  systemctl start autofs
+  128  systemctl status autofs
+  129  vi /etc/auto.master
+  130  useradd -u 5000 appuser
+  131  useradd -u 5001 appuser1
+  132  echo "appuser"|passwd --stdin appuser
+  133  echo "appuser"|passwd --stdin appuser1
+  134  yum install nfs* -y
+  135  systemctl enable nfs-server
+  136  systemctl start nfs-server
+  137  systemctl status nfs-server
+  138  vi /etc/exports
+  139  exportfs -bra
+  140  exportfs -vra
+  141  showmount -e
+  142  showmount -e 192.168.21.100
+  143  systemctl status firewalld
+  144  systemctl stop firewalld
+  145  systemctl disable firewalld
+  146  getenforce
+  147  setenforce
+  148  setenforce -0
+  149  setenforce 0
+  150  getenforce
+  151  vi /etc/selinux/config
+  152  getenforce
+  153  showmount -e 192.168.21.100
+  154  userdel -r appuser
+  155  useradd -M -d /export/guests/appuser appuser
+  156  echo "appuser" |passwd --stdin appuser
+  157  su - appuser
+  158  exportfs -vra
+  159  systemctl restart nfs-server
+  160  exportfs -vra
+  161  systemctl enable autofs
+  162  systemctl start autofs
+  163  systemctl status autofs
+  164  vi /etc/aa.map
+  165  vi /etc/auto.master
+  166  systemctl restart autofs
+  167  su - appuser
+  168  usermod -u 5001 appuser1
+  169  tail /etc/passwd
+  170  showmount -e
+  171  cat /etc/exports
+  172  cp -r /etc/fstab /var/tmp/
+  173  cd /var/tmp/
+  174  ll
+  175  cd
+  176  setfacl -m u:larry:x,u:curly:rw /var/tmp/fstab
+  177  ls -ld /var/tmp/fstab
+  178  getfacl /var/tmp/fstab
+  179  cd /opt
+  180  ll
+  181  cd
+  182  cp /etc /cte
+  183  cp -r /etc /cte
+  184* tar -cvf sravya.tar /etc
+  185  gzip sravya.tar
+  186  ls -l sravya.tar gz
+  187  ls -l sravya.tar.gz
+  188  mv sravya.tar.gz /opt/
+  189  cd /opt/
+  190  ll
+  191  mkdir /shares/manual1
+  192  mkdir -p /shares/manual1
+  193  vi /etc/exports
+  194  exportfs -vra
+  195  showmount -e 192.168.21.100
+  196  cd
+  197  vi /etc/bb.map
+  198  vi /etc/auto.master
+  199  systemctl restart autofs
+  200  df -h
+  201  cd /opt/tmp
+  202  df -h
+  203  cd
+  204  useradd -u 1000 natasha
+  205  useradd -u 1009 natasha
+  206  echo "natasha"|passwd --stdin natasha
+  207  su - natasha
+  208  nmcli c s
+  209  nmcli d s
+  210  nmcli c s
+  211  nmcli d s
+  212  nmcli con add con-name team0 ifname team0 type team config '{"runner":{"name":"activebackup"}}' ipv4.addresses 192.168.66.100/16 ipv4.gateway 192.168.1.20 ipv4.dns 192.168.2.46
+  213  nmcli c d ens224
+  214  nmcli c del ens224
+  215  nmcli con del ens224
+  216  ip a
+  217  nmcli con del b3c38bec-a4eb-32b8-ae40-83f32f91df08
+  218  nmcli con del 8e7f8875-13d1-3115-9949-12bddfcdb901
+  219  nmcli con add con-name ens224 ifname ens224 type team-slave master team0
+  220  nmcli con add con-name ens256 ifname ens256 type team-slave master team0
+  221  nmcli  c d
+  222  nmcli c s
+  223  teamdctl team0 state
+  224  nmcli con down ens224
+  225  teamdctl team0 state
+  226  nmcli con up ens224
+  227  teamdctl team0 state
+  228  history
+[root@server36 ~]#
